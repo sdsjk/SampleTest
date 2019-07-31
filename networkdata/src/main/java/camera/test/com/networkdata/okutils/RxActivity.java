@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
 
+import javax.security.auth.login.LoginException;
+
 import camera.test.com.networkdata.R;
 import camera.test.com.networkdata.exception.MyException;
 import io.reactivex.Observable;
@@ -18,6 +20,8 @@ import io.reactivex.ObservableOnSubscribe;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.BiConsumer;
+import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
@@ -32,7 +36,138 @@ public class RxActivity extends AppCompatActivity {
     }
 
 
-    public void RX2concatDelayError(View view){
+
+    public void  RX2startWith(View view){
+        Observable.just(1,2,3).startWith(Observable.just(3,2,1)).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Log.e("TAG","============="+integer);
+            }
+        });
+    }
+    public void RX2collect(View view){
+        Observable.just(1,2,3,4).collect(new Callable<ArrayList<Integer>>() {
+            @Override
+            public ArrayList<Integer> call() throws Exception {
+                return new ArrayList<>();
+            }
+        }, new BiConsumer<ArrayList<Integer>, Integer>() {
+            @Override
+            public void accept(ArrayList<Integer> integers, Integer integer) throws Exception {
+                    integers.add(integer+1);
+            }
+        }).subscribe(new Consumer<ArrayList<Integer>>() {
+            @Override
+            public void accept(ArrayList<Integer> integers) throws Exception {
+                Log.e("TAG","==========="+integers);
+            }
+        });
+    }
+
+    public void RX2reduce(View view){
+        Observable.just(1,2,3,4).reduce(new BiFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer integer, Integer integer2) throws Exception {
+                Log.e("TAG", integer2+"apply: "+integer );
+                return integer+integer2;
+            }
+        }).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Log.e("TAG","============="+integer);
+            }
+        });
+    }
+
+    public void  RX2CombineLatestDelayError(View view){
+        Observable<Integer> integerObservable = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                    e.onNext(1);
+                    e.onNext(2);
+                    e.onNext(3);
+//                e.onError(new MyException("测试异常"));
+            }
+        });
+        Observable<Integer> integerObservable2 = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                e.onNext(4);
+                e.onNext(5);
+                e.onNext(6);
+                e.onError(new MyException("测试异常"));
+            }
+        });
+        Observable[] observables={integerObservable,integerObservable2};
+        Observable.combineLatestDelayError(observables, new Function<Object[], Integer>() {
+            @Override
+            public Integer apply(Object[] objects) throws Exception {
+                int sum;
+                sum = Integer.parseInt(objects[0].toString())+Integer.parseInt(objects[1].toString());
+
+                return sum;
+            }
+        }).subscribe(new Observer<Integer>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(Integer value) {
+                Log.e("TAG","onNext==========="+value);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e("TAG","onError==========="+e);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    public void RX2CombineLatest(View view) {
+        Observable<Integer> integerObservable2 = Observable.create(new ObservableOnSubscribe<Integer>() {
+            @Override
+            public void subscribe(ObservableEmitter<Integer> e) throws Exception {
+                e.onNext(4);
+                e.onNext(5);
+                e.onNext(6);
+            }
+        });
+        Observable.combineLatest(integerObservable2,Observable.just(1, 2, 3), new BiFunction<Integer, Integer, Integer>() {
+            @Override
+            public Integer apply(Integer integer, Integer integer2) throws Exception {
+                return integer+integer2;
+            }
+        }).subscribe(new Consumer<Integer>() {
+            @Override
+            public void accept(Integer integer) throws Exception {
+                Log.e("TAG","合并结果是:"+integer);
+            }
+        });
+    }
+
+    public void RX2Zip(View view) {
+        Observable.zip(Observable.just(1, 2, 3, 4, 5), Observable.fromArray("A", "B", "C", "D"), new BiFunction<Integer, String, String>() {
+            @Override
+            public String apply(Integer integer, String s) throws Exception {
+                return integer + "::" + s;
+            }
+        }).subscribe(new Consumer<String>() {
+            @Override
+            public void accept(String s) throws Exception {
+                Log.e("TAG", "======" + s);
+            }
+        });
+
+    }
+
+    public void RX2concatDelayError(View view) {
         Observable.concatArrayDelayError(Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
             public void subscribe(ObservableEmitter<Integer> e) throws Exception {
@@ -56,7 +191,7 @@ public class RxActivity extends AppCompatActivity {
 
             @Override
             public void onNext(Integer value) {
-                Log.e("TAG", "concat============="+value);
+                Log.e("TAG", "concat=============" + value);
             }
 
             @Override
@@ -72,29 +207,29 @@ public class RxActivity extends AppCompatActivity {
 
     }
 
-    public void RX2mergeArray(View view){
+    public void RX2mergeArray(View view) {
         Observable.mergeArray(
-                Observable.intervalRange(1, 2, 3, 1,TimeUnit.SECONDS),
-                Observable.intervalRange(5, 3, 3, 1,TimeUnit.SECONDS),
+                Observable.intervalRange(1, 2, 3, 1, TimeUnit.SECONDS),
+                Observable.intervalRange(5, 3, 3, 1, TimeUnit.SECONDS),
                 Observable.just(5l, 6l, 7l, 8l),
                 Observable.just(9l, 10l),
                 Observable.just(11l)).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long integer) throws Exception {
-                Log.e("TAG", "concat============="+integer);
+                Log.e("TAG", "concat=============" + integer);
             }
         });
     }
 
-    public void RX2merge(View view){
+    public void RX2merge(View view) {
         Observable.merge(
-                Observable.intervalRange(1, 2, 3, 1,TimeUnit.SECONDS),
+                Observable.intervalRange(1, 2, 3, 1, TimeUnit.SECONDS),
                 Observable.just(5l, 6l, 7l, 8l),
                 Observable.just(9l, 10l),
                 Observable.just(11l)).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long integer) throws Exception {
-                Log.e("TAG", "concat============="+integer);
+                Log.e("TAG", "concat=============" + integer);
             }
         });
     }
@@ -107,10 +242,11 @@ public class RxActivity extends AppCompatActivity {
                 Observable.just(13, 14, 15)).subscribe(new Consumer<Integer>() {
             @Override
             public void accept(Integer integer) throws Exception {
-                Log.e("TAG", "concat============="+integer);
+                Log.e("TAG", "concat=============" + integer);
             }
         });
     }
+
     public void RX2Contat(View view) {
         Observable.merge(
                 Observable.just(5l, 6l, 7l, 8l),
@@ -118,7 +254,7 @@ public class RxActivity extends AppCompatActivity {
                 Observable.just(11l)).subscribe(new Consumer<Long>() {
             @Override
             public void accept(Long integer) throws Exception {
-                Log.e("TAG", "concat============="+integer);
+                Log.e("TAG", "concat=============" + integer);
             }
         });
     }

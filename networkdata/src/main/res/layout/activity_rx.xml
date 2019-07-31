@@ -143,5 +143,38 @@
         android:layout_height="wrap_content"
         android:text="合并操作符(Zip)"
         />
+    <Button
+        android:onClick="RX2CombineLatest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(combineLatest)"
+        />
+    <Button
+        android:onClick="RX2CombineLatestDelayError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(combineLatestDelayError)"
+        />
+    <Button
+        android:onClick="RX2reduce"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(reduce)"
+        />
+    <Button
+        android:onClick="RX2collect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(collect)"
+        />
+
+    <Button
+        android:onClick="RX2startWith"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(startWith/startWithArray)"
+        />
+
+
 </LinearLayout>
 </ScrollView>
