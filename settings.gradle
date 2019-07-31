@@ -1,0 +1,1 @@
+include ':app', ':testutils', ':perssion', ':appstatus', ':facepick', ':animation', ':activitylifcly', ':mvp', ':networkdata'

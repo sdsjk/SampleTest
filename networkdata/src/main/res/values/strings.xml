@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">NetWorkData</string>
+    <string name="tv">基本的创建操作符号:create,just,fromArray,fromIterable,empty,error,never,timer,defer,interval,intervalRange,range</string>
+    <string name="tv2" > 基本的变换操作符:map/FlatMap/ConcatMap/Buffer</string>
+    <string name="app_zip" >基本的合并操作符:contact,concatArray,merge,mergeArray</string>
+</resources>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".okutils.RxActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/tv"
+        />
+    <Button
+        android:onClick="Rx1"
+        android:text="创建操作符RX使用"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="Rx2Just"
+        android:text="创建操作符(Just)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="Rx2FromArray"
+        android:text="创建操作符(FromArray)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="Rx2fromIterable"
+        android:text="创建操作符(fromIterable)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="Rx2Test"
+        android:text="创建操作符(empty,error,never)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="Rx2defer"
+        android:text="创建操作符(defer)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="Rx2timer"
+        android:text="创建操作符(defer)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="Rx2Interval"
+        android:text="创建操作符(interval)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="Rx2IntervalRange"
+        android:text="创建操作符(intervalRange)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="Rx2range"
+        android:text="创建操作符(range)"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/tv2"
+        />
+
+    <Button
+        android:onClick="RX2map"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="变换操作符(map)"
+        />
+
+    <Button
+        android:onClick="RX2flatMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="变换操作符(flatMap)"
+        />
+    <Button
+        android:onClick="RX2ConcatMap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="变换操作符(ConcatMap)"
+        />
+    <Button
+        android:onClick="RX2Buffer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="变换操作符(Buffer)"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/app_zip"
+        />
+    <Button
+        android:onClick="RX2Contat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(Contat)"
+        />
+    <Button
+        android:onClick="RX2ContatArray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(ContatArray)"
+        />
+    <Button
+        android:onClick="RX2merge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(merge)"
+        />
+    <Button
+        android:onClick="RX2mergeArray"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(mergeArray)"
+        />
+    <Button
+        android:onClick="RX2concatDelayError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(concatDelayError/concatDelayError)"
+        />
+    <Button
+        android:onClick="RX2Zip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="合并操作符(Zip)"
+        />
+</LinearLayout>
+</ScrollView>
