@@ -3,4 +3,23 @@
     <string name="tv">基本的创建操作符号:create,just,fromArray,fromIterable,empty,error,never,timer,defer,interval,intervalRange,range</string>
     <string name="tv2" > 基本的变换操作符:map/FlatMap/ConcatMap/Buffer</string>
     <string name="app_zip" >基本的合并操作符:contact,concatArray,merge,mergeArray</string>
+    <string name="subscribe" > 订阅，即连接观察者 被观察者</string>
+    <string name="subscribeOn">线程控制（也称为调度 / 切换）subscribeOn（） / observeOn（）延迟操作delay（）</string>
+    <string name="donext" >  do（）操作符有很多个
+        doOnEach (当Observable每发送1次数据事件就会调用1次)、
+        doOnNext（执行Next事件前调用）、
+        doAfterNext(执行Next事件后调用)、
+        doOnComplete（Observable正常发送事件完毕后调用）
+        doOnError（Observable发送错误事件时调用）
+        doOnSubscribe 观察者订阅时调用
+        doAfterTerminate（Observable发送事件完毕后调用，无论正常发送完毕 / 异常终止）
+        doFinally（最后执行）
+    </string>
+    <string name="error" > onErrorReturn(遇到错误时，发送1个特殊事件  正常终止)、
+        onErrorResumeNext （遇到错误时，发送1个新的Observable）
+        onExceptionResumeNext （拦截的错误 = Exception）
+    </string>
+    <string name="retry" > retry(遇到错误时，发送1个特殊事件  正常终止)</string>
+    <string name="retryWhen" > retryWhen(遇到错误时，将发生的错误传递给一个新的被观察者（Observable），并决定是否需要重新订阅原始被观察者（Observable）发送事件)</string>
+    <string name="repeat" > repeat(无条件发送)</string>
 </resources>

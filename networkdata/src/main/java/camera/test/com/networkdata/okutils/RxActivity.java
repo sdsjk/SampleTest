@@ -646,7 +646,6 @@ public class RxActivity extends AppCompatActivity {
                 mDisposable = d;
                 Log.d("TAG", "开始采用subscribe连接");
             }
-
             @Override
             public void onNext(String value) {
                 if ("A".equals(value)) {
@@ -655,12 +654,10 @@ public class RxActivity extends AppCompatActivity {
                 Log.d("TAG", "对Next事件作出响应" + value);
 
             }
-
             @Override
             public void onError(Throwable e) {
                 Log.d("TAG", "onError事件" + e);
             }
-
             @Override
             public void onComplete() {
                 Log.d("TAG", "onComplete事件");
@@ -668,6 +665,7 @@ public class RxActivity extends AppCompatActivity {
         };
 
         observable.subscribe(observer);
+
     }
 
 
